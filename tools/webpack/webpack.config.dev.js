@@ -13,6 +13,7 @@ module.exports = {
     filename: '[name].js',
     assetModuleFilename: "images/[hash][ext][query]",
     chunkFilename: '[name].chunk.js',
+    publicPath: '/'
   },
   plugins: require('./webpack.plugins'),
   resolve: {
