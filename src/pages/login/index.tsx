@@ -10,9 +10,14 @@ const Login = () => {
   };
 
   return (
-    <div>
-      Login Page
-      <button onClick={forceLogin}>Login</button>
+    <div className='text-center flex flex-col gap-10'>
+      <h1 className='text-5xl font-medium text-blue-800'>Login Page</h1>
+      <button
+        onClick={forceLogin}
+        className='bg-blue-600 text-white py-2 rounded-md w-1/2 mx-auto '
+      >
+        Login
+      </button>
     </div>
   );
 };

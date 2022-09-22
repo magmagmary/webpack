@@ -1,27 +1,15 @@
 const path = require("path")
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'production',
-  entry: {
-    bundle: path.resolve(__dirname, "../../src/index.tsx")
-  },
-  module: {
-    rules: require('./webpack.rules'),
-  },
   output: {
-    path: path.resolve(__dirname, "../../build"),
+    path: path.resolve(__dirname, "./build"),
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].chunk.js',
     assetModuleFilename: "images/[hash][ext][query]",
     clean: true,
-  },
-  plugins: [...require('./webpack.plugins')],
-  resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
-    alias: {
-      // Custom Aliases
-      ...require('./webpack.aliases'),
-    },
   },
   stats: 'errors-warnings',
   optimization: {
@@ -42,4 +30,5 @@ module.exports = {
       },
     },
   },
-};
+}
+);

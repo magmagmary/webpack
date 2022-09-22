@@ -1,8 +1,9 @@
-import { inDev } from '@assets/utils/helpers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
+import './assets/styles/main.scss';
+const isDev = process.env.NODE_ENV === 'development';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,4 +15,4 @@ ReactDOM.render(
 );
 
 // Hot module replacement
-if (inDev() && module.hot) module.hot.accept();
+if (isDev && module.hot) module.hot.accept();

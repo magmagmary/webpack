@@ -20,6 +20,7 @@ const Application = () => {
           whole application.
         </p>
         <br />
+
         <button onClick={() => setCounter(counter + 1)}>
           Counter <span>{counter}</span>
         </button>

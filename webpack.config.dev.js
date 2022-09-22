@@ -1,29 +1,15 @@
 const path = require("path")
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'development',
-  entry: {
-    bundle: path.resolve(__dirname, "../../src/index.tsx")
-  },
-  module: {
-    rules: require('./webpack.rules'),
-  },
   output: {
     path: path.resolve(__dirname, "../../build"),
     filename: '[name].js',
     assetModuleFilename: "images/[hash][ext][query]",
     chunkFilename: '[name].chunk.js',
     publicPath: '/'
-  },
-  plugins: require('./webpack.plugins'),
-  resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
-    alias: {
-      // React Hot Loader Patch
-      'react-dom': '@hot-loader/react-dom',
-      // Custom Aliases
-      ...require('./webpack.aliases'),
-    },
   },
   stats: {
     all: undefined,
@@ -47,4 +33,5 @@ module.exports = {
   performance: {
     hints: false,
   },
-};
+}
+);

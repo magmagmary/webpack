@@ -1,5 +1,5 @@
-@use './variable';
+// @use './variable';
 
-body {
-  background: variable.$color-green;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

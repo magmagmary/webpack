@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import MainLayout from '@src/components/layout/MainLayout';
 import Login from '@src/pages/login';
 import Error from '@src/pages/error';
 import Dashboard from '@src/pages/dashboard';
@@ -22,7 +21,7 @@ function Index() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/dashboard/test' element={<Test />} />
       </Route>
-      <Route element={<MainLayout />}>
+      <Route element={<EmptyLayput />}>
         <Route path='/login' element={<Login />} />
       </Route>
       <Route element={<EmptyLayput />}>
@@ -34,7 +33,6 @@ function Index() {
 
 const RequireAuth: FC<{ children: JSX.Element }> = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem('token');
-  console.log('isAuthenticated', isAuthenticated);
 
   return isAuthenticated ? children : <Navigate to='/login' />;
 };
