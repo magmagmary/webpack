@@ -6,9 +6,9 @@ module.exports = merge(common, {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, "../../build"),
-    filename: '[name].js',
-    assetModuleFilename: "images/[hash][ext][query]",
-    chunkFilename: '[name].chunk.js',
+    filename: 'static/js/[name].js',
+    assetModuleFilename: "static/assets/[hash][ext][query]",
+    chunkFilename: 'static/js/[name].chunk.js',
     publicPath: '/'
   },
   stats: {
@@ -17,13 +17,17 @@ module.exports = merge(common, {
   devtool: 'cheap-module-source-map',
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'dist'),
+      directory: path.resolve(__dirname, 'build'),
     },
     open: true,
     hot: true,
     compress: true,
-    port: 3000,
+    port: 44330,
     historyApiFallback: true,
+    https: {
+      key: path.resolve(__dirname, "./localhost-key.pem"),
+      cert: path.resolve(__dirname, "./localhost.pem"),
+    },
   },
   optimization: {
     splitChunks: {

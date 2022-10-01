@@ -35,6 +35,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+build/
 
 # TypeScript v1 declaration files
 typings/
@@ -86,4 +87,4 @@ typings/
 .webpack/
 
 # Distributions
-dist/
+build/

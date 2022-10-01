@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -39,7 +41,7 @@ module.exports = {
             },
             {
                 // CSS and SCSS Loader
-                test: /\.s[ac]ss$/i,
+                test: /\.s?css$/i,
                 use: [
                     { loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader },
                     { loader: 'css-loader' },
@@ -53,32 +55,47 @@ module.exports = {
                 type: "asset"
             },
             {
-                // Font & SVG loader
+                // Font loader
                 test: /\.(woff(2)?|ttf|otf|eot)$/,
                 type: "asset"
             },
+            {
+                test: /\.(json)$/,
+                type: "javascript/auto",
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[folder]/[name].[ext]",
+                            outputPath: "/locales"
+                        }
+                    }
+                ]
+            }
         ]
     },
     plugins: [
         new CleanWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: "webpack app",
             template: path.resolve(__dirname, "./src/index.html"),
             favicon: path.resolve(__dirname, "./src/assets/images/logo.png"),
             inject: true,
+            filename: "index.html"
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[chunkhash].css',
-            chunkFilename: '[name].[chunkhash].chunk.css',
+            filename: 'static/css/[name].[chunkhash].css',
+            chunkFilename: 'static/css/[name].[chunkhash].chunk.css',
         }),
+        new Dotenv(),
+        new WebpackManifestPlugin()
     ],
     resolve: {
-        extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
+        extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', ".json"],
         alias: {
             'react-dom': '@hot-loader/react-dom',
             '@assets': path.resolve(__dirname, './src/assets/'),
-            '@src': path.resolve(__dirname, './src//'),
+            '@src': path.resolve(__dirname, './src/'),
         },
     },
 };

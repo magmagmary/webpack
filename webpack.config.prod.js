@@ -5,10 +5,10 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    path: path.resolve(__dirname, "./build"),
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].chunk.js',
-    assetModuleFilename: "images/[hash][ext][query]",
+    path: path.resolve("build"),
+    filename: 'static/js/[name].[chunkhash].js',
+    chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
+    assetModuleFilename: "static/assets/[hash][ext][query]",
     clean: true,
   },
   stats: 'errors-warnings',
@@ -26,9 +26,14 @@ module.exports = merge(common, {
           name: 'vendors',
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
+          // path: path.resolve(__dirname, "./build/static/js/")
         },
       },
     },
   },
+  performance: {
+    maxAssetSize: 1000000,
+    maxEntrypointSize: 1000000,
+  }
 }
 );
