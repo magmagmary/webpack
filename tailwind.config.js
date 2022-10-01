@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   mode: "jit",
@@ -7,7 +8,16 @@ module.exports = {
     './src/**/*.tsx',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#007AFF',
+        darkBlue: "#1F2F61",
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant('child', '& > *');
+    }),
+  ],
 }

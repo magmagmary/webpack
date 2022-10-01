@@ -1,5 +1,20 @@
-// @use './variable';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: iransans;
+  src: url('@assets/fonts/iransans/IRANSansX-Regular.woff') format('woff');
+}
+
+@layer base {
+  html {
+    font-family: iransans, system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply text-white bg-primary hover:bg-opacity-90 focus:outline-none font-medium rounded-md text-sm h-14 lg:h-12 px-5 text-center transition-all duration-200  my-3;
+  }
+}

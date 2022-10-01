@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
-import './assets/styles/main.scss';
+import App from './App';
+import '@assets/styles/main.scss';
+import '@src/plugins/I18n';
+import Loading from '@src/components/shared/Loading';
+
 const isDev = process.env.NODE_ENV === 'development';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Suspense fallback={<Loading />}>
     <Router>
       <App />
     </Router>
-  </React.StrictMode>,
+  </React.Suspense>,
   document.getElementById('root'),
 );
 

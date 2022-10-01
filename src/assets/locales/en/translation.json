@@ -1,0 +1,13 @@
+{
+   "login":{
+      "title":"Login to Admin Panel",
+      "btn":"Login"
+   },
+   "dashboard":{
+      "nav":{
+         "dashboard":"Dashboard",
+         "test":"Test",
+         "logout":"Logout"
+      }
+   }
+}

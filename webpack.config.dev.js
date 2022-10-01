@@ -24,10 +24,6 @@ module.exports = merge(common, {
     compress: true,
     port: 44330,
     historyApiFallback: true,
-    https: {
-      key: path.resolve(__dirname, "./localhost-key.pem"),
-      cert: path.resolve(__dirname, "./localhost.pem"),
-    },
   },
   optimization: {
     splitChunks: {
