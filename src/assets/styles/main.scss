@@ -17,4 +17,17 @@
   .btn-primary {
     @apply text-white bg-primary hover:bg-opacity-90 focus:outline-none font-medium rounded-md text-sm h-14 lg:h-12 px-5 text-center transition-all duration-200  my-3;
   }
+  .form-group {
+    @apply flex flex-col gap-1 mb-5;
+  }
+
+  .form-control {
+    @apply h-10 rounded-md px-4 text-gray-700  focus-within:ring-0 focus-within:outline-none focus:ring-0 focus:outline-none;
+  }
+  .form-label {
+    @apply cursor-pointer text-gray-700;
+  }
+  .feedback-error {
+    @apply text-red-600 mt-1 text-sm;
+  }
 }

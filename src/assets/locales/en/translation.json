@@ -1,4 +1,10 @@
 {
+   "validation":{
+      "required":"The {{name}} field is required",
+      "email":"The email format is not correct",
+      "password":"Password should contain 5 charachter at least" ,
+      "confirmPassword":"The passwords does not match"
+   },
    "login":{
       "title":"Login to Admin Panel",
       "btn":"Login"
@@ -7,7 +13,15 @@
       "nav":{
          "dashboard":"Dashboard",
          "test":"Test",
-         "logout":"Logout"
+         "logout":"Logout",
+         "form":"Form"
+      },
+      "form":{
+         "title":"Form With Test",
+         "email":"Email addreess",
+         "password":"Password",
+         "confirm_password":"Conform Password",
+         "submit":"submit"
       }
    }
 }

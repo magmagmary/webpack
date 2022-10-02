@@ -10,6 +10,7 @@ module.exports = merge(common, {
     chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
     assetModuleFilename: "static/assets/[hash][ext][query]",
     clean: true,
+    publicPath: '/'
   },
   stats: 'errors-warnings',
   optimization: {

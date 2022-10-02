@@ -7,6 +7,7 @@ import EmptyLayput from '@src/components/layout/EmptyLayput';
 import React from 'react';
 import Dashboardlayout from '@src/components/layout/Dashboardlayout';
 import ProtectedeRoute from './ProtectedeRoute';
+import Form from '@src/pages/dashboard/form';
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
         <Route path='/' element={<Dashboard />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/dashboard/test' element={<Test />} />
+        <Route path='/dashboard/form' element={<Form />} />
       </Route>
       <Route element={<EmptyLayput />}>
         <Route path='/login' element={<Login />} />
