@@ -4,14 +4,24 @@ import Form from './Form';
 import { fireEvent, screen } from '@testing-library/react';
 import RenderWithi18n from '../../../components/shared/RenderWithi18n';
 
-test('home component render correctly', async () => {
+beforeEach(() => {
   RenderWithi18n(<Form />);
+});
+
+const WriteInInputElement = (selector: string, value: string): HTMLElement => {
+  const element = screen.getByRole('textbox', {
+    name: selector,
+  });
+  fireEvent.change(element, { target: { value } });
+  return element;
+};
+
+test('home component render correctly', async () => {
   const item = screen.getByText('Form With Test');
   expect(item).toBeInTheDocument();
 });
 
 test('inputs should be initially empty', () => {
-  RenderWithi18n(<Form />);
   const emailInputElement = screen.getByRole('textbox', {
     name: 'Email addreess',
   });
@@ -27,61 +37,40 @@ test('inputs should be initially empty', () => {
 });
 
 test('should be able to type an email', () => {
-  RenderWithi18n(<Form />);
   const _email = 'm@m.co';
-  const emailInputElement = screen.getByRole('textbox', {
-    name: 'Email addreess',
-  });
-  fireEvent.change(emailInputElement, { target: { value: _email } });
-  expect(emailInputElement).toHaveAttribute('value', _email);
+  const element = WriteInInputElement('Email addreess', _email);
+  expect(element).toHaveAttribute('value', _email);
 });
 
 test('should be able to type an password', () => {
-  RenderWithi18n(<Form />);
   const _pass = 'Arduino';
-  const passwordInputElement = screen.getByRole('textbox', {
-    name: 'Password',
-  });
-  fireEvent.change(passwordInputElement, { target: { value: _pass } });
-  expect(passwordInputElement).toHaveAttribute('value', _pass);
+  const element = WriteInInputElement('Password', _pass);
+  expect(element).toHaveAttribute('value', _pass);
 });
 
 test('should be able to type an confirm password', () => {
-  RenderWithi18n(<Form />);
   const _pass = 'Arduino';
-  const confirmPasswordInputElement = screen.getByRole('textbox', {
-    name: 'Conform Password',
-  });
-  fireEvent.change(confirmPasswordInputElement, { target: { value: _pass } });
-  expect(confirmPasswordInputElement).toHaveAttribute('value', _pass);
+  const element = WriteInInputElement('Conform Password', _pass);
+  expect(element).toHaveAttribute('value', _pass);
 });
 
 test('should show error message when no data has entered', () => {
-  RenderWithi18n(<Form />);
   const btnElement = screen.getByText('submit');
   fireEvent.click(btnElement);
   const errors = screen.getAllByText(/field is required/i);
   expect(errors.length).toBe(3);
 });
 
-test('should show validation error message for non-corect email type', () => {
-  RenderWithi18n(<Form />);
-  const emailInputElement = screen.getByRole('textbox', {
-    name: 'Email addreess',
-  });
-  fireEvent.change(emailInputElement, { target: { value: 'magmag' } });
+test('should show validation error message for incorrect email type', () => {
+  WriteInInputElement('Email addreess', 'magmag');
   const btnElement = screen.getByText('submit');
   fireEvent.click(btnElement);
   const errors = screen.getByText(/The email format is not correct/i);
   expect(errors).toBeInTheDocument();
 });
 
-test('should show validation error message for password less than 4 char', () => {
-  RenderWithi18n(<Form />);
-  const passwordInputElement = screen.getByRole('textbox', {
-    name: 'Password',
-  });
-  fireEvent.change(passwordInputElement, { target: { value: '000' } });
+test('should show validation error message for password which is less than 4 char', () => {
+  WriteInInputElement('Password', '000');
   const btnElement = screen.getByText('submit');
   fireEvent.click(btnElement);
   const errors = screen.getByText(
@@ -91,19 +80,21 @@ test('should show validation error message for password less than 4 char', () =>
 });
 
 test('should show validation error message for unequal password and confirm password', () => {
-  RenderWithi18n(<Form />);
-  const passwordInputElement = screen.getByRole('textbox', {
-    name: 'Password',
-  });
-  const confirmPasswordInputElement = screen.getByRole('textbox', {
-    name: 'Conform Password',
-  });
-  fireEvent.change(passwordInputElement, { target: { value: '00000' } });
-  fireEvent.change(confirmPasswordInputElement, {
-    target: { value: '11111' },
-  });
+  WriteInInputElement('Password', '00000');
+  WriteInInputElement('Conform Password', '11111');
   const btnElement = screen.getByText('submit');
   fireEvent.click(btnElement);
   const errors = screen.getByText(/The passwords does not match/i);
   expect(errors).toBeInTheDocument();
+});
+
+test('should not display any error when tha input data is correct', () => {
+  WriteInInputElement('Email addreess', 'magmag@mg.com');
+  WriteInInputElement('Password', '11111');
+  WriteInInputElement('Conform Password', '11111');
+  const btnElement = screen.getByText('submit');
+  fireEvent.click(btnElement);
+  const form = screen.getByTestId('form');
+  const errors = form.querySelectorAll('.feedback-error');
+  expect(errors.length).toBe(0);
 });

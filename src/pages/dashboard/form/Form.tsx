@@ -81,7 +81,12 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} className='w-1/2 2xl:w-1/3'>
+    <form
+      onSubmit={onSubmit}
+      className='w-1/2 2xl:w-1/3'
+      role='form'
+      data-testid='form'
+    >
       <h1 className='text-xl font-bold mb-8' data-testid='form-heading'>
         {translate('dashboard.form.title')}
       </h1>
