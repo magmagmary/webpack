@@ -10,7 +10,7 @@ const Dashboardlayput = () => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    navigate('/login');
+    navigate('/home');
   };
 
   return (
@@ -25,7 +25,7 @@ const Dashboardlayput = () => {
         <p onClick={logout} className='text-red-500'>
           {translate('dashboard.nav.logout')}
         </p>
-        <LocaleSwitcher customClass='flex-grow flex items-center justify-end'></LocaleSwitcher>
+        <LocaleSwitcher customClass='flex-grow flex items-center justify-end' />
       </nav>
       <main className='px-10 py-8'>
         <Outlet />

@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from '@src/pages/login';
 import Error from '@src/pages/error';
 import Dashboard from '@src/pages/dashboard/dashboard';
 import Test from '@src/pages/dashboard/test/Test';
@@ -8,6 +7,8 @@ import React from 'react';
 import Dashboardlayout from '@src/components/layout/Dashboardlayout';
 import ProtectedeRoute from './ProtectedeRoute';
 import Form from '@src/pages/dashboard/form';
+import Home from '@src/pages/Home';
+import MainLayout from '@src/components/layout/MainLayout';
 
 function Router() {
   return (
@@ -24,8 +25,8 @@ function Router() {
         <Route path='/dashboard/test' element={<Test />} />
         <Route path='/dashboard/form' element={<Form />} />
       </Route>
-      <Route element={<EmptyLayput />}>
-        <Route path='/login' element={<Login />} />
+      <Route element={<MainLayout />}>
+        <Route path='/home' element={<Home />} />
       </Route>
       <Route element={<EmptyLayput />}>
         <Route path='*' element={<Error />} />

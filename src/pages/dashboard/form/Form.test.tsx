@@ -16,85 +16,89 @@ const WriteInInputElement = (selector: string, value: string): HTMLElement => {
   return element;
 };
 
-test('home component render correctly', async () => {
-  const item = screen.getByText('Form With Test');
-  expect(item).toBeInTheDocument();
-});
+const submitForm = () => {
+  const btnElement = screen.getByText('submit');
+  fireEvent.click(btnElement);
+};
 
-test('inputs should be initially empty', () => {
-  const emailInputElement = screen.getByRole('textbox', {
-    name: 'Email addreess',
+describe('Happy Path', () => {
+  test('home component render correctly', async () => {
+    const item = screen.getByText('Form With Test');
+    expect(item).toBeInTheDocument();
   });
-  const passwordInputElement = screen.getByRole('textbox', {
-    name: 'Password',
+
+  test('inputs should be initially empty', () => {
+    const emailInputElement = screen.getByRole('textbox', {
+      name: 'Email addreess',
+    });
+    const passwordInputElement = screen.getByRole('textbox', {
+      name: 'Password',
+    });
+    const confirmPasswordInputElement = screen.getByRole('textbox', {
+      name: 'Conform Password',
+    });
+    expect(emailInputElement).toHaveAttribute('value', '');
+    expect(passwordInputElement).toHaveAttribute('value', '');
+    expect(confirmPasswordInputElement).toHaveAttribute('value', '');
   });
-  const confirmPasswordInputElement = screen.getByRole('textbox', {
-    name: 'Conform Password',
+
+  test('should be able to type an email', () => {
+    const _email = 'm@m.co';
+    const element = WriteInInputElement('Email addreess', _email);
+    expect(element).toHaveAttribute('value', _email);
   });
-  expect(emailInputElement).toHaveAttribute('value', '');
-  expect(passwordInputElement).toHaveAttribute('value', '');
-  expect(confirmPasswordInputElement).toHaveAttribute('value', '');
+
+  test('should be able to type an password', () => {
+    const _pass = 'Arduino';
+    const element = WriteInInputElement('Password', _pass);
+    expect(element).toHaveAttribute('value', _pass);
+  });
+
+  test('should be able to type an confirm password', () => {
+    const _pass = 'Arduino';
+    const element = WriteInInputElement('Conform Password', _pass);
+    expect(element).toHaveAttribute('value', _pass);
+  });
+
+  test('should not display any error when tha input data is correct', () => {
+    WriteInInputElement('Email addreess', 'magmag@mg.com');
+    WriteInInputElement('Password', '11111');
+    WriteInInputElement('Conform Password', '11111');
+    submitForm();
+    const form = screen.getByTestId('form');
+    const errors = form.querySelectorAll('.feedback-error');
+    expect(errors.length).toBe(0);
+  });
 });
 
-test('should be able to type an email', () => {
-  const _email = 'm@m.co';
-  const element = WriteInInputElement('Email addreess', _email);
-  expect(element).toHaveAttribute('value', _email);
-});
+describe('Error handling', () => {
+  test('should show error message when no data has entered', () => {
+    submitForm();
+    expect(screen.getAllByText(/field is required/i).length).toBe(3);
+  });
 
-test('should be able to type an password', () => {
-  const _pass = 'Arduino';
-  const element = WriteInInputElement('Password', _pass);
-  expect(element).toHaveAttribute('value', _pass);
-});
+  test('should show validation error message for incorrect email type', () => {
+    WriteInInputElement('Email addreess', 'magmag');
+    submitForm();
+    expect(
+      screen.getByText(/The email format is not correct/i),
+    ).toBeInTheDocument();
+  });
 
-test('should be able to type an confirm password', () => {
-  const _pass = 'Arduino';
-  const element = WriteInInputElement('Conform Password', _pass);
-  expect(element).toHaveAttribute('value', _pass);
-});
+  test('should show validation error message for password which is less than 4 char', () => {
+    WriteInInputElement('Password', '000');
+    submitForm();
+    expect(
+      screen.getByText(/Password should contain 5 charachter at least/i),
+    ).toBeInTheDocument();
+  });
 
-test('should show error message when no data has entered', () => {
-  const btnElement = screen.getByText('submit');
-  fireEvent.click(btnElement);
-  const errors = screen.getAllByText(/field is required/i);
-  expect(errors.length).toBe(3);
-});
-
-test('should show validation error message for incorrect email type', () => {
-  WriteInInputElement('Email addreess', 'magmag');
-  const btnElement = screen.getByText('submit');
-  fireEvent.click(btnElement);
-  const errors = screen.getByText(/The email format is not correct/i);
-  expect(errors).toBeInTheDocument();
-});
-
-test('should show validation error message for password which is less than 4 char', () => {
-  WriteInInputElement('Password', '000');
-  const btnElement = screen.getByText('submit');
-  fireEvent.click(btnElement);
-  const errors = screen.getByText(
-    /Password should contain 5 charachter at least/i,
-  );
-  expect(errors).toBeInTheDocument();
-});
-
-test('should show validation error message for unequal password and confirm password', () => {
-  WriteInInputElement('Password', '00000');
-  WriteInInputElement('Conform Password', '11111');
-  const btnElement = screen.getByText('submit');
-  fireEvent.click(btnElement);
-  const errors = screen.getByText(/The passwords does not match/i);
-  expect(errors).toBeInTheDocument();
-});
-
-test('should not display any error when tha input data is correct', () => {
-  WriteInInputElement('Email addreess', 'magmag@mg.com');
-  WriteInInputElement('Password', '11111');
-  WriteInInputElement('Conform Password', '11111');
-  const btnElement = screen.getByText('submit');
-  fireEvent.click(btnElement);
-  const form = screen.getByTestId('form');
-  const errors = form.querySelectorAll('.feedback-error');
-  expect(errors.length).toBe(0);
+  test('should show validation error message for unequal password and confirm password', () => {
+    WriteInInputElement('Password', '00000');
+    WriteInInputElement('Conform Password', '11111');
+    submitForm();
+    expect(
+      screen.getByText(/The passwords does not match/i),
+    ).toBeInTheDocument();
+  });
 });
