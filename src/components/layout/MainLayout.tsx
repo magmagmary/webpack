@@ -27,9 +27,7 @@ function MainLayout() {
         </p>
         <LocaleSwitcher customClass='flex items-center justify-end' />
       </nav>
-      <div className='py-4 px-10'>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 }
