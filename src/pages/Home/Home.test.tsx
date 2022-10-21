@@ -61,14 +61,28 @@ describe('Home', () => {
     fireEvent.click(within(catsElemets[3]).getByRole('button'));
     fireEvent.click(within(catsElemets[4]).getByRole('button'));
     WriteInSelectElement('Favorite', 'favorite');
-    const favoritElements = screen.getAllByRole('article');
-    expect(favoritElements).toStrictEqual([
+    expect(screen.getAllByRole('article')).toStrictEqual([
       catsElemets[0],
       catsElemets[3],
       catsElemets[4],
     ]);
     WriteInSelectElement('Favorite', 'not_favorite');
-    const notFavoritElements = screen.getAllByRole('article');
-    expect(notFavoritElements).toStrictEqual([catsElemets[1], catsElemets[2]]);
+    expect(screen.getAllByRole('article')).toStrictEqual([
+      catsElemets[1],
+      catsElemets[2],
+    ]);
+  });
+
+  test('should filter to favorites female cats after selecting the combobox', async () => {
+    const catsElemets = await screen.findAllByRole('article');
+    fireEvent.click(within(catsElemets[0]).getByRole('button'));
+    fireEvent.click(within(catsElemets[1]).getByRole('button'));
+    fireEvent.click(within(catsElemets[2]).getByRole('button'));
+    WriteInSelectElement('Gender', 'female');
+    WriteInSelectElement('Favorite', 'favorite');
+    expect(screen.getAllByRole('article')).toStrictEqual([
+      catsElemets[0],
+      catsElemets[2],
+    ]);
   });
 });

@@ -4,11 +4,18 @@ import React from 'react';
 import Cards from './Cards';
 import { screen } from '@testing-library/react';
 import RenderWithi18n from '../../../components/shared/RenderWithi18n';
+import { CatsContext } from '../Home';
 import { cats } from '@src/mocks/cats';
 
 describe('Cards', () => {
   beforeEach(() => {
-    RenderWithi18n(<Cards cats={cats} updateCats={() => {}} />);
+    RenderWithi18n(
+      <CatsContext.Provider
+        value={{ cats, setcats: () => {}, mainCatsList: cats }}
+      >
+        <Cards />
+      </CatsContext.Provider>,
+    );
   });
   test('should contain five card in component', () => {
     expect(screen.getAllByRole('article').length).toBe(5);

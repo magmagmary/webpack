@@ -1,15 +1,23 @@
 import Heart from '@src/components/shared/icons/Heart';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useContext, useState } from 'react';
+import { CatsContext } from '../Home';
 import { ICat } from '../homeInterfaces';
 
 const Card: FC<{
   item: ICat;
-  updateCats: (a: number, b: boolean) => void;
-}> = ({ item, updateCats }) => {
+}> = ({ item }) => {
   const [favorite, setFavorite] = useState<boolean>(item.favoured);
+  const { mainCatsList, setcats } = useContext(CatsContext);
+
+  const updateMainCatsList = (id: number, state: boolean) => {
+    const _cats: ICat[] = [...mainCatsList];
+    const index = _cats.findIndex((cat) => cat.id === id);
+    _cats[index].favoured = state;
+    setcats(_cats);
+  };
 
   const toggleFavoriteState = (id: number) => {
-    updateCats(id, !favorite);
+    updateMainCatsList(id, !favorite);
     setFavorite((pre: boolean) => !pre);
   };
 
