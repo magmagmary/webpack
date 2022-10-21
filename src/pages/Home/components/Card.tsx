@@ -1,40 +1,47 @@
 import Heart from '@src/components/shared/icons/Heart';
-import React, { FC, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 import { ICat } from '../homeInterfaces';
 
-const Card: FC<{ item: ICat }> = ({ item }) => {
-  const [favorite, setFavorite] = useState<boolean>(item.isFavorite);
+const Card: FC<{
+  item: ICat;
+  updateCats: (a: number, b: boolean) => void;
+}> = ({ item, updateCats }) => {
+  const [favorite, setFavorite] = useState<boolean>(item.favoured);
+
+  const toggleFavoriteState = (id: number) => {
+    updateCats(id, !favorite);
+    setFavorite((pre: boolean) => !pre);
+  };
+
   return (
-    <div className='bg-white rounded-md border-gray-300 overflow-hidden relative w-52'>
+    <article className='bg-white rounded-md border-gray-300 overflow-hidden relative hover:shadow-2xl h-80'>
       <button
         className='absolute top-3 ltr:right-3 rtl:left-3 bg-slate-300 w-8 aspect-square rounded-full center text-purple-800'
-        onClick={() => {
-          setFavorite((pre: boolean) => !pre);
-        }}
+        onClick={() => toggleFavoriteState(item.id)}
       >
         <Heart
           data-testid={favorite ? 'filled-heart' : 'ouline-heart'}
           width='1.5rem'
-          className={`mx-auto stroke-current ${
+          className={`mx-auto stroke-current  ${
             favorite ? 'fill-purple-800' : 'fill-slate-300'
           }`}
         />
       </button>
       {item.image && (
         <img
-          src={item.image}
-          alt={item.name}
-          className='h-2/3 object-contain'
+          src={item.image.url}
+          alt={item.image.alt}
+          className='h-2/3 w-full object-cover mx-auto'
           data-testid='main-image'
         />
       )}
-      <div className='flex flex-col justify-center items-center gap-3 text-purple-800 p-4'>
-        <h2>{item.name}</h2>
-        <p>{item.ownerNumber}</p>
-        <p>{item.ownerEmail}</p>
+      <div className='flex flex-col justify-center items-center gap-1 text-purple-800 py-2 '>
+        <h2 className='truncate'>{item.name}</h2>
+        <p>{item.phone}</p>
+        <p>{item.email}</p>
       </div>
-    </div>
+    </article>
   );
 };
 
-export default Card;
+export default memo(Card);

@@ -9,6 +9,14 @@
        "title":"ورود به پنل کاربری",
        "btn":"ورود"
     },
+    "filter":{
+      "all":"همه",
+      "favorite":"مورد علاقه",
+      "not_favorite":"غیر مورد علاقه",
+      "female":"خانم",
+      "male":"آقا",
+      "gender":"جنسیت"
+   },
     "dashboard":{
        "nav":{
           "dashboard":"داشبورد",

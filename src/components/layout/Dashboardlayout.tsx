@@ -15,7 +15,7 @@ const Dashboardlayput = () => {
 
   return (
     <div className='bg-blue-100   min-h-screen'>
-      <nav className='flex items-center gap-5 text-xl py-4 px-10 bg-white shadow-xl w-full child:cursor-pointer sticky top-0'>
+      <nav className='flex items-center gap-5 text-xl py-4 px-10 bg-white shadow-xl w-full child:cursor-pointer sticky top-0 z-50'>
         <Link to='/dashboard'>
           <img src={logo} alt='' className='w-8 mr-8' />
         </Link>

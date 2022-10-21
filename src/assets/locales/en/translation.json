@@ -9,6 +9,14 @@
       "title":"Login to Admin Panel",
       "btn":"Login"
    },
+   "filter":{
+      "all":"All",
+      "favorite":"Favorite",
+      "not_favorite":"Not Favorite",
+      "female":"Female",
+      "male":"Male",
+      "gender":"Gender"
+   },
    "dashboard":{
       "nav":{
          "dashboard":"Dashboard",
