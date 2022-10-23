@@ -15,7 +15,8 @@
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@src/*": ["./src/*"]
-    }
+    },
+    "types": ["cypress"]
   },
   "include": ["src/**/*", "tools/**/*"]
 }
