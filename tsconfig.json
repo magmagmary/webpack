@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
-    "target": "ES6",
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -12,11 +14,12 @@
     "outDir": "./build",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "strict": true,
+    "declaration": true,
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@src/*": ["./src/*"]
-    },
-    "types": ["cypress"]
+    }
   },
-  "include": ["src/**/*", "tools/**/*"]
+  "include": ["src/**/*", "tools/**/*" ]
 }

@@ -27,7 +27,6 @@ module.exports = merge(common, {
           name: 'vendors',
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
-          // path: path.resolve(__dirname, "./build/static/js/")
         },
       },
     },
