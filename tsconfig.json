@@ -10,16 +10,16 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "outDir": "./build",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "strict": true,
     "declaration": true,
+    "baseUrl": ".",
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@src/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "tools/**/*" ]
+  "include": ["src/**/*" ]
 }
