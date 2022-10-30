@@ -5,11 +5,15 @@ import logo from '@assets/images/logo.png';
 import { useTranslation } from 'react-i18next';
 import LocaleSwitcher from '../shared/LocaleSwitcher';
 import Basket from '../shared/icons/Basket';
+import { useSelector } from 'react-redux';
+import { cartproductsCount } from '@src/pages/cart/cartSelectors';
 
 function MainLayout() {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const location = useLocation();
+  const basketItemsCount = useSelector(cartproductsCount);
+
   const forceLogin = () => {
     localStorage.setItem('token', 'test');
     navigate('/');
@@ -34,8 +38,10 @@ function MainLayout() {
           </Link>
         </div>
         {shouldDisplayCart && (
-          <Link to='/cart' className='flex  text-primary'>
-            <span>1</span>
+          <Link to='/cart' className='flex  text-primary relative'>
+            <span className='absolute -top-1 ltr:-right-2 rtl:-left-2 text-[10px] rounded-full p-2 w-4 h-4 center bg-primary text-white'>
+              {basketItemsCount}
+            </span>
             <Basket fill='#007AFF' className='h-6 w-auto' />
           </Link>
         )}

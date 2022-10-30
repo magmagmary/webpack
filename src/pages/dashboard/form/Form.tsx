@@ -136,7 +136,7 @@ const Form = () => {
           <p className='feedback-error'>{error['confirmPassword']}</p>
         )}
       </div>
-      <button className='btn-primary text-base'>
+      <button className='btn btn-primary text-base'>
         {translate('dashboard.form.submit')}
       </button>
     </form>

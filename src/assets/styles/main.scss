@@ -14,8 +14,14 @@
 }
 
 @layer components {
+  .btn {
+    @apply focus:outline-none font-medium rounded-md text-sm h-14 lg:h-12 px-5 text-center transition-all duration-200 my-3;
+  }
   .btn-primary {
-    @apply text-white bg-primary hover:bg-opacity-90 focus:outline-none font-medium rounded-md text-sm h-14 lg:h-12 px-5 text-center transition-all duration-200  my-3;
+    @apply text-white bg-primary hover:bg-opacity-90;
+  }
+  .btn-danger {
+    @apply text-white bg-red-700 hover:bg-opacity-90;
   }
   .form-group {
     @apply flex flex-col gap-1 mb-5;
