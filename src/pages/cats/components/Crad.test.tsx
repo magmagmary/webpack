@@ -4,7 +4,7 @@ import React from 'react';
 import Card from './Card';
 import { fireEvent, screen } from '@testing-library/react';
 import RenderWithi18n from '../../../components/shared/RenderWithi18n';
-import { CatsContext } from '../Home';
+import { CatsContext } from '../Cats';
 import { cats } from '@src/mocks/cats';
 
 describe('Card', () => {

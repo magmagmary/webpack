@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import Home from './Home';
+import Home from './Cats';
 import { fireEvent, screen, within } from '@testing-library/react';
 import RenderWithi18n from '@src/components/shared/RenderWithi18n';
 import { rest } from 'msw';

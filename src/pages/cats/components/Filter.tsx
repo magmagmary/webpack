@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Gender, IFilter } from '../homeInterfaces';
+import { Gender, IFilter } from '../catsInterfaces';
 
 const Filter: FC<{
   filters: IFilter;

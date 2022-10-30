@@ -9,6 +9,10 @@
       "title":"Login to Admin Panel",
       "btn":"Login"
    },
+   "nav":{
+      "cats":"Cats",
+      "products":"Products"
+   },
    "filter":{
       "all":"All",
       "favorite":"Favorite",

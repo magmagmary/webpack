@@ -31,3 +31,9 @@
     @apply text-red-600 mt-1 text-sm;
   }
 }
+
+@layer utilities {
+  .center {
+    @apply flex items-center justify-center;
+  }
+}

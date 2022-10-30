@@ -7,8 +7,9 @@ import React from 'react';
 import Dashboardlayout from '@src/components/layout/Dashboardlayout';
 import ProtectedeRoute from './ProtectedeRoute';
 import Form from '@src/pages/dashboard/form';
-import Home from '@src/pages/Home';
 import MainLayout from '@src/components/layout/MainLayout';
+import Cats from '@src/pages/cats';
+import Home from '@src/pages/home';
 
 function Router() {
   return (
@@ -27,6 +28,9 @@ function Router() {
       </Route>
       <Route element={<MainLayout />}>
         <Route path='/home' element={<Home />} />
+        <Route path='/cats' element={<Cats />} />
+        <Route path='/products' element={<Cats />} />
+        <Route path='/cart' element={<Cats />} />
       </Route>
       <Route element={<EmptyLayput />}>
         <Route path='*' element={<Error />} />

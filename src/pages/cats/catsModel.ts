@@ -1,4 +1,4 @@
-import { Gender, ICat, IImage } from './homeInterfaces';
+import { Gender, ICat, IImage } from './catsInterfaces';
 
 class BaseModel<T> {
   toObject(): T {

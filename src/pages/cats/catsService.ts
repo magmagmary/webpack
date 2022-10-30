@@ -1,7 +1,7 @@
 import axiosClient from '@src/plugins/axios';
 import { AxiosResponse } from 'axios';
-import { ICat } from './homeInterfaces';
-import { Cat } from './homeModel';
+import { ICat } from './catsInterfaces';
+import { Cat } from './catsModel';
 
 const uiAccountEndpoint = `${process.env.IDP_BASE_URL}`;
 

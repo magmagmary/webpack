@@ -1,4 +1,4 @@
-import { Gender, ICat } from '@src/pages/Home/homeInterfaces';
+import { Gender, ICat } from '@src/pages/cats/catsInterfaces';
 
 export const cats: ICat[] = [
   {

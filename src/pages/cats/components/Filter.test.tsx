@@ -3,7 +3,7 @@ import React from 'react';
 import Filter from './Filter';
 import { fireEvent, screen } from '@testing-library/react';
 import RenderWithi18n from '../../../components/shared/RenderWithi18n';
-import { IFilter } from '../homeInterfaces';
+import { IFilter } from '../catsInterfaces';
 
 const WriteInSelectElement = (selector: string, value: string): HTMLElement => {
   const element = screen.getByRole('combobox', { name: selector });

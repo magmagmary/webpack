@@ -16,9 +16,17 @@ function MainLayout() {
   return (
     <div>
       <nav className='flex items-center gap-5 text-xl py-4 px-10 bg-white shadow-xl w-full child:cursor-pointer sticky top-0 z-50'>
-        <Link to='/dashboard' className='flex-grow'>
-          <img src={logo} alt='' className='w-8 mr-8' />
-        </Link>
+        <div className='flex-grow flex items-center gap-5'>
+          <Link to='/dashboard'>
+            <img src={logo} alt='' className='w-8 mr-8' />
+          </Link>
+          <Link to='/cats' className='center'>
+            {translate('nav.cats')}
+          </Link>
+          <Link to='/products' className='center'>
+            {translate('nav.products')}
+          </Link>
+        </div>
         <p
           onClick={forceLogin}
           className='text-primary ltr:border-r rtl:border-l border-gray-300 px-5'

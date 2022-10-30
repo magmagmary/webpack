@@ -1,5 +1,5 @@
 import { cats } from '@src/mocks/cats';
-import { getCats } from './homeService';
+import { getCats } from './catsService';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 

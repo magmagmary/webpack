@@ -1,7 +1,7 @@
 import Heart from '@src/components/shared/icons/Heart';
 import React, { FC, memo, useContext, useState } from 'react';
-import { CatsContext } from '../Home';
-import { ICat } from '../homeInterfaces';
+import { CatsContext } from '../Cats';
+import { ICat } from '../catsInterfaces';
 
 const Card: FC<{
   item: ICat;

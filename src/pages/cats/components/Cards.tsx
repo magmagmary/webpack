@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
-import { CatsContext } from '../Home';
-import { ICat } from '../homeInterfaces';
+import { CatsContext } from '../Cats';
+import { ICat } from '../catsInterfaces';
 import Card from './Card';
 
 const Cards = () => {
