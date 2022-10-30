@@ -5,7 +5,7 @@ const Home = () => {
   const childClass =
     'child:text-gray-700 child:border child:border-gray-400 child:rounded-lg child:px-4 child:py-2';
   return (
-    <div className='px-10 py-4'>
+    <div>
       <section className='py-10 border-b'>
         <h1 className='text-center text-blue-700 text-4xl font-bold'>
           MagMagMary React Application

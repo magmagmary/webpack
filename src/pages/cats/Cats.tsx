@@ -49,7 +49,7 @@ const Home = () => {
   }, [filters, cats]);
 
   return (
-    <div className='bg-gray-200 min-h-screen py-4 px-10 grid grid-cols-3 2xl:grid-cols-5 gap-8'>
+    <div className='bg-gray-200 h-full grid grid-cols-3 2xl:grid-cols-5 gap-8'>
       <CatsContext.Provider
         value={{ cats: filteredCats, setcats, mainCatsList: cats }}
       >

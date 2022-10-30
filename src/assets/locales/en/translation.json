@@ -21,6 +21,14 @@
       "male":"Male",
       "gender":"Gender"
    },
+   "products":{
+      "cart":"Cart Items",
+      "empty":"The card is empty",
+      "products":"Back to Products",
+      "add":"Add to Basket",
+      "remove":"Remove Item",
+      "checkout":"Checkout"
+   },
    "dashboard":{
       "nav":{
          "dashboard":"Dashboard",
