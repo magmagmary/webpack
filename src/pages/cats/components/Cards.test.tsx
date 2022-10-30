@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import '@testing-library/jest-dom';
 import React from 'react';
 import Cards from './Cards';
@@ -10,9 +9,7 @@ import { cats } from '@src/mocks/cats';
 describe('Cards', () => {
   beforeEach(() => {
     RenderWithi18n(
-      <CatsContext.Provider
-        value={{ cats, setcats: () => {}, mainCatsList: cats }}
-      >
+      <CatsContext.Provider value={{ cats, mainCatsList: cats }}>
         <Cards />
       </CatsContext.Provider>,
     );

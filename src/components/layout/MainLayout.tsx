@@ -36,6 +36,9 @@ function MainLayout() {
           <Link to='/products' className='center'>
             {translate('nav.products')}
           </Link>
+          <Link to='/posts' className='center'>
+            {translate('nav.posts')}
+          </Link>
         </div>
         {shouldDisplayCart && (
           <Link to='/cart' className='flex  text-primary relative'>

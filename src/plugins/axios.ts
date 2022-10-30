@@ -5,7 +5,9 @@ let axiosRequestInterceptorId = -1;
 let axiosResponseInterceptorId = -1;
 
 function axiosInterceptors() {
+  const baseUrl = `${process.env.IDP_BASE_URL}`;
   axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = baseUrl;
 
   if (axiosRequestInterceptorId === -1) {
     axiosRequestInterceptorId = axios.interceptors.request.use(

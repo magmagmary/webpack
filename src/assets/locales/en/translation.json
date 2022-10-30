@@ -11,7 +11,8 @@
    },
    "nav":{
       "cats":"Cats",
-      "products":"Products"
+      "products":"Products",
+      "posts":"Posts"
    },
    "filter":{
       "all":"All",
@@ -28,6 +29,17 @@
       "add":"Add to Basket",
       "remove":"Remove Item",
       "checkout":"Checkout"
+   },
+   "cats":{
+      "title":"To get the list of cats <strong>node index</strong> command must run in the server folder."
+   },
+   "posts":{
+      "form":"Add new Post",
+      "title":"Title",
+      "content":"Content",
+      "author":"Author",
+      "submit":"submit",
+      "unknown":"Unknown"
    },
    "dashboard":{
       "nav":{

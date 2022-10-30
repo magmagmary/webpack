@@ -23,3 +23,7 @@ export enum Gender {
   MALE = 'male',
   FEMALE = 'female',
 }
+
+export enum Types {
+  GET_CATS = 'get_cats',
+}

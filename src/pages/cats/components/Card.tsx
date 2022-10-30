@@ -1,19 +1,22 @@
-import Heart from '@src/components/shared/icons/Heart';
 import React, { FC, memo, useContext, useState } from 'react';
+import Heart from '@src/components/shared/icons/Heart';
+import { useDispatch } from 'react-redux';
 import { CatsContext } from '../Cats';
 import { ICat } from '../catsInterfaces';
+import { catsAction } from '../catsSlice';
 
 const Card: FC<{
   item: ICat;
 }> = ({ item }) => {
   const [favorite, setFavorite] = useState<boolean>(item.favoured);
-  const { mainCatsList, setcats } = useContext(CatsContext);
+  const { mainCatsList } = useContext(CatsContext);
+  const dispatch = useDispatch();
 
   const updateMainCatsList = (id: number, state: boolean) => {
     const _cats: ICat[] = [...mainCatsList];
     const index = _cats.findIndex((cat) => cat.id === id);
     _cats[index].favoured = state;
-    setcats(_cats);
+    dispatch(catsAction.updateCats(_cats));
   };
 
   const toggleFavoriteState = (id: number) => {

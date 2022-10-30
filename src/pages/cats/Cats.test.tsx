@@ -42,7 +42,8 @@ describe('Home', () => {
   });
 
   test('should contain five card in component', async () => {
-    expect(await (await screen.findAllByRole('article')).length).toBe(5);
+    const articles = await screen.findAllByRole('article');
+    expect(articles.length).toBe(5);
   });
 
   test('should filter to male and female cats after selecting the combobox', async () => {

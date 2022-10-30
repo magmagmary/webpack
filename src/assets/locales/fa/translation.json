@@ -11,7 +11,8 @@
     },
     "nav":{
       "cats":"گربه ها",
-      "products":"محصولات"
+      "products":"محصولات",
+      "posts":"پست ها"
    },
     "filter":{
       "all":"همه",
@@ -28,6 +29,17 @@
       "add":"افزودن به سبد",
       "remove":"حذف از سبد",
       "checkout":"فاکتور"
+   },
+   "cats":{
+      "title":"برای دریافت لیست گربه ها باید در فولدر سرور کامند <strong>node index</strong> اجرا شود."
+   },
+   "posts":{
+      "form":"ثبت پست جدید",
+      "title":"عنوان",
+      "content":"متن",
+      "author":"نویسنده",
+      "submit":"ثبت",
+      "unknown":"ناشناس"
    },
     "dashboard":{
        "nav":{

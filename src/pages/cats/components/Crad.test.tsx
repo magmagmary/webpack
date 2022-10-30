@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import '@testing-library/jest-dom';
 import React from 'react';
 import Card from './Card';
@@ -11,9 +10,7 @@ describe('Card', () => {
   describe('Not Favorite card', () => {
     beforeEach(() => {
       RenderWithi18n(
-        <CatsContext.Provider
-          value={{ cats, setcats: () => {}, mainCatsList: cats }}
-        >
+        <CatsContext.Provider value={{ cats, mainCatsList: cats }}>
           <Card item={cats[0]} />
         </CatsContext.Provider>,
       );
@@ -51,9 +48,7 @@ describe('Card', () => {
     test('should display filled heart', () => {
       cats[0].favoured = true;
       RenderWithi18n(
-        <CatsContext.Provider
-          value={{ cats, setcats: () => {}, mainCatsList: cats }}
-        >
+        <CatsContext.Provider value={{ cats, mainCatsList: cats }}>
           <Card item={cats[0]} />
         </CatsContext.Provider>,
       );

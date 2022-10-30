@@ -12,6 +12,7 @@ import Cats from '@src/pages/cats';
 import Home from '@src/pages/home';
 import Products from '@src/pages/products';
 import Cart from '@src/pages/cart';
+import Posts from '@src/pages/posts';
 
 function Router() {
   return (
@@ -33,6 +34,7 @@ function Router() {
         <Route path='/cats' element={<Cats />} />
         <Route path='/products' element={<Products />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/posts' element={<Posts />} />
       </Route>
       <Route element={<EmptyLayput />}>
         <Route path='*' element={<Error />} />

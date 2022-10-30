@@ -1,30 +1,28 @@
-import React, {
-  createContext,
-  useEffect,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import Cards from './components/Cards';
 import Filter from './components/Filter';
 import { ICat, IFilter } from './catsInterfaces';
-import { getCats } from './catsService';
+import { Trans } from 'react-i18next';
+import { fetchAllcats } from './catsSlice';
+import store from '@src/store';
+import axiosClient from '@src/plugins/axios';
+import { useSelector } from 'react-redux';
+import { getCatsList } from './catsSelector';
 
 interface IContxt {
   cats: ICat[];
-  setcats: Dispatch<SetStateAction<ICat[]>>;
   mainCatsList: ICat[];
 }
 
 export const CatsContext = createContext<IContxt>({} as IContxt);
 
 const Home = () => {
-  const [cats, setcats] = useState<ICat[]>([] as ICat[]);
   const [filteredCats, setFilteredCats] = useState<ICat[]>([] as ICat[]);
   const [filters, setFilters] = useState<IFilter>({
     gender: 'all',
     isFavorite: 'all',
   });
+  const cats: ICat[] = useSelector(getCatsList);
 
   const filterCats = () => {
     let _cats = [...cats];
@@ -39,22 +37,24 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getCats().then((data: ICat[]) => {
-      setcats(data);
-    });
+    axiosClient.setupAxiosInterceptors();
+    store.dispatch(fetchAllcats());
   }, []);
 
   useEffect(() => {
     filterCats();
   }, [filters, cats]);
 
+  console.log('catsssssss', cats);
+
   return (
     <div className='bg-gray-200 h-full grid grid-cols-3 2xl:grid-cols-5 gap-8'>
-      <CatsContext.Provider
-        value={{ cats: filteredCats, setcats, mainCatsList: cats }}
-      >
+      <CatsContext.Provider value={{ cats: filteredCats, mainCatsList: cats }}>
         <Filter filters={filters} setFilters={setFilters} />
         <div className='col-span-2 2xl:col-span-4'>
+          <h2 className='bg-red-200 p-2 mb-5'>
+            <Trans i18nKey='cats.title' />
+          </h2>
           <Cards />
         </div>
       </CatsContext.Provider>

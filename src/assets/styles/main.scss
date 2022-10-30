@@ -16,6 +16,9 @@
 @layer components {
   .btn {
     @apply focus:outline-none font-medium rounded-md text-sm h-14 lg:h-12 px-5 text-center transition-all duration-200 my-3;
+    &:disabled {
+      @apply bg-gray-500 cursor-not-allowed;
+    }
   }
   .btn-primary {
     @apply text-white bg-primary hover:bg-opacity-90;
