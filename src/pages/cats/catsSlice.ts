@@ -17,7 +17,7 @@ const initialState: ICatsInterface = {
 };
 
 export const fetchAllcats = createAsyncThunk(
-  'cats/cats',
+  Types.GET_CATS,
   async (): Promise<ICat[]> => {
     const url = 'cats';
     try {

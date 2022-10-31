@@ -4,9 +4,9 @@ import Filter from './components/Filter';
 import { ICat, IFilter } from './catsInterfaces';
 import { Trans } from 'react-i18next';
 import { fetchAllcats } from './catsSlice';
-import store from '@src/store';
+import store, { AppDispatch } from '@src/store';
 import axiosClient from '@src/plugins/axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCatsList } from './catsSelector';
 
 interface IContxt {
@@ -23,6 +23,7 @@ const Home = () => {
     isFavorite: 'all',
   });
   const cats: ICat[] = useSelector(getCatsList);
+  const dispatch = useDispatch<AppDispatch>();
 
   const filterCats = () => {
     let _cats = [...cats];
@@ -38,14 +39,12 @@ const Home = () => {
 
   useEffect(() => {
     axiosClient.setupAxiosInterceptors();
-    store.dispatch(fetchAllcats());
+    dispatch(fetchAllcats());
   }, []);
 
   useEffect(() => {
     filterCats();
   }, [filters, cats]);
-
-  console.log('catsssssss', cats);
 
   return (
     <div className='bg-gray-200 h-full grid grid-cols-3 2xl:grid-cols-5 gap-8'>

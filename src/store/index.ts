@@ -9,6 +9,10 @@ const store = configureStore({
     cats: catsReducer,
     post: postReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;

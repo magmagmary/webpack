@@ -1,3 +1,4 @@
+import { AppDispatch } from '@src/store';
 import React, {
   ChangeEvent,
   memo,
@@ -9,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from '../poseSelectors';
 import { IPost, IUser } from '../postInterface';
-import { postAction } from '../postSlice';
+import { addNewPost, postAction } from '../postSlice';
 
 function NewPost() {
   const { t: translate } = useTranslation();
@@ -19,7 +20,7 @@ function NewPost() {
     userId: '',
   });
   const users = useSelector(getAllUsers);
-  const dispath = useDispatch();
+  const dispath = useDispatch<AppDispatch>();
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -29,7 +30,7 @@ function NewPost() {
 
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispath(postAction.addPost(data));
+    dispath(addNewPost(data));
   };
 
   const userOptions = useMemo<JSX.Element[]>(() => {
