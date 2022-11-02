@@ -6,13 +6,14 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { AppDispatch, RootState } from '@src/store';
+import { RootState } from '@src/store';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getAllUsers, getPost } from '../poseSelectors';
 import { IPost, IUser } from '../postInterface';
 import { addNewPost, editPost, fetchAllUsers } from '../postSlice';
+import { useAppDispatch } from '@src/hooks/redux';
 
 function NewPost() {
   const { t: translate } = useTranslation();
@@ -27,7 +28,7 @@ function NewPost() {
   const [data, setData] = useState<Partial<IPost>>(post);
   const [status, setStatus] = useState<'idle' | 'pending'>('idle');
   const users = useSelector(getAllUsers);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {

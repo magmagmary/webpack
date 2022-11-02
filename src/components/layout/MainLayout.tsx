@@ -5,17 +5,17 @@ import logo from '@assets/images/logo.png';
 import { Trans, useTranslation } from 'react-i18next';
 import LocaleSwitcher from '../shared/LocaleSwitcher';
 import Basket from '../shared/icons/Basket';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { cartproductsCount } from '@src/pages/cart/cartSelectors';
 import { checkServerStatus, getServerState } from '@src/store/publicSlice';
-import { AppDispatch } from '@src/store';
+import { useAppDispatch } from '@src/hooks/redux';
 
 function MainLayout() {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const location = useLocation();
   const basketItemsCount = useSelector(cartproductsCount);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const serverStatus = useSelector(getServerState);
 
   useEffect(() => {

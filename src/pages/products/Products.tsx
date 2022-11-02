@@ -1,6 +1,6 @@
+import { useAppDispatch } from '@src/hooks/redux';
 import React, { useEffect } from 'react';
-import { AppDispatch } from '@src/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Card from './Components/ProductCard';
 import { IProduct } from './productInterface';
 import { getAllProducts } from './productSelector';
@@ -8,7 +8,7 @@ import { fetchAllProducts } from './productSlice';
 
 const Products = () => {
   const products = useSelector(getAllProducts);
-  const dispath = useDispatch<AppDispatch>();
+  const dispath = useAppDispatch();
 
   useEffect(() => {
     dispath(fetchAllProducts());

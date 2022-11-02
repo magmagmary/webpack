@@ -1,16 +1,18 @@
 import React, { useEffect, useMemo } from 'react';
-import { AppDispatch } from '@src/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PostCard from './components/PostCard';
 import { getAllPosts } from './poseSelectors';
 import { IPost } from './postInterface';
 import { fetchAllPosts } from './postSlice';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
+import { useAppDispatch } from '@src/hooks/redux';
 
 const Posts = () => {
   const posts: IPost[] = useSelector(getAllPosts);
-  const dispatch = useDispatch<AppDispatch>();
+
+  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
 
   useEffect(() => {

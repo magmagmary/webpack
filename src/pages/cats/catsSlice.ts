@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axiosClient from '@src/plugins/axios';
 import { AxiosResponse } from 'axios';
+import _ from 'lodash';
 import { ICat, Types } from './catsInterfaces';
 import { Cat } from './catsModel';
 
@@ -71,7 +72,7 @@ const cartSlice = createSlice({
           const id = action.payload;
           const index = state.catsList.findIndex((p) => p.id === +id);
           if (index === -1) return;
-          const _cats = [...state.catsList];
+          const _cats = _.clone(state.catsList);
           _cats[index].favoured = !_cats[index].favoured;
           state.catsList = _cats;
         },

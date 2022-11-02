@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { IPost } from '../postInterface';
 import Author from './Author';
 import Reactions from './Reactions';
 import Date from './Date';
 import Trash from '@src/components/shared/icons/Trash';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@src/store';
+
 import { deletePost } from '../postSlice';
 import { Link } from 'react-router-dom';
 import Edit from '@src/components/shared/icons/Edit';
+import { useAppDispatch } from '@src/hooks/redux';
 
 const PostCard: FC<{ post: IPost }> = ({ post }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   return (
     <div className='border border-gray-700 rounded-lg p-5 flex flex-col relative hover:shadow-lg cursor-pointer'>
@@ -39,4 +39,4 @@ const PostCard: FC<{ post: IPost }> = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default memo(PostCard);

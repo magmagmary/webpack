@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import Heart from '@src/components/shared/icons/Heart';
-import { useDispatch } from 'react-redux';
 import { ICat } from '../catsInterfaces';
 import { toggleFavoriteCat } from '../catsSlice';
-import { AppDispatch } from '@src/store';
+import { useAppDispatch } from '@src/hooks/redux';
 
 const Card: FC<{
   item: ICat;
 }> = ({ item }) => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   return (
     <article className='bg-white rounded-md border-gray-300 overflow-hidden relative hover:shadow-2xl h-80'>

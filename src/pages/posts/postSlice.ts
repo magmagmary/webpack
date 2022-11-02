@@ -43,7 +43,7 @@ export const fetchAllPosts = createAsyncThunk(
         url,
       );
       const _data: IPost[] = response.data.map((item: IPost) => new Post(item));
-      return _data;
+      return _data as IPost[];
     } catch (error: unknown) {
       throw new Error(`Error in '(${url})'`);
     }
@@ -104,16 +104,20 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     reactToPost: (
-      state,
+      state: IPostInterface,
       action: PayloadAction<{ id: string; reaction: keyof IReaction }>,
     ) => {
       const { id, reaction } = action.payload;
       const indexOfPost = state.posts.findIndex((p: IPost) => p.id === id);
       if (indexOfPost !== -1) {
-        const _posts = [...state.posts];
-        _posts[indexOfPost].reactions[reaction]++;
-        state.posts = _posts;
-        console.log(' state.posts', state.posts);
+        const currentPost = state.posts[indexOfPost];
+        state.posts[indexOfPost] = {
+          ...currentPost,
+          reactions: {
+            ...currentPost.reactions,
+            [reaction]: currentPost.reactions[reaction] + 1,
+          },
+        };
       }
     },
   },
@@ -143,11 +147,8 @@ const cartSlice = createSlice({
         state.posts.push(action.payload);
       })
       .addCase(editPost.fulfilled, (state, action: PayloadAction<IPost>) => {
-        const _posts = [...state.posts];
-        const index = _posts.findIndex((p) => p.id === action.payload.id);
-        _posts[index] = action.payload;
-        _posts[index].date = new Date().toISOString();
-        state.posts = _posts;
+        const index = state.posts.findIndex((p) => p.id === action.payload.id);
+        state.posts[index] = action.payload;
       })
       .addCase(deletePost.fulfilled, (state, action: PayloadAction<string>) => {
         const id = action.payload;

@@ -3,9 +3,10 @@ import Cards from './components/CatsCards';
 import Filter from './components/Filter';
 import { ICat, IFilter } from './catsInterfaces';
 import { fetchAllcats } from './catsSlice';
-import { AppDispatch } from '@src/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getCatsList } from './catsSelector';
+import { useAppDispatch } from '@src/hooks/redux';
+import _ from 'lodash';
 
 interface IContxt {
   cats: ICat[];
@@ -20,10 +21,10 @@ const Home = () => {
     isFavorite: 'all',
   });
   const cats: ICat[] = useSelector(getCatsList);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const filterCats = () => {
-    let _cats = [...cats];
+    let _cats = _.clone(cats);
     if (filters.gender !== 'all') {
       _cats = _cats.filter((cat) => cat.gender === filters.gender);
     }

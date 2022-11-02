@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { AppDispatch, RootState } from '@src/store';
+import React, { useEffect } from 'react';
+import { RootState } from '@src/store';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAllPosts, getPost } from './poseSelectors';
-import { IPost } from './postInterface';
-import { useDispatch } from 'react-redux';
+
 import { fetchAllPosts, fetchAllUsers } from './postSlice';
-import axiosClient from '@src/plugins/axios';
 import { useTranslation } from 'react-i18next';
 import PostCard from './components/PostCard';
+import { useAppDispatch } from '@src/hooks/redux';
 
 function Post() {
   const { postId } = useParams();
   const post = useSelector((state: RootState) => getPost(state, postId || ''));
   const posts = useSelector(getAllPosts);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { t: translate } = useTranslation();
 
   useEffect(() => {

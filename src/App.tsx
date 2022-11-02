@@ -14,7 +14,6 @@ const App = () => {
     getAxiosInstanceState,
   );
 
-  console.log('axiosClientState', axiosClientState);
   if (axiosClientState === 'disabled') return <></>;
   return <Router />;
 };
