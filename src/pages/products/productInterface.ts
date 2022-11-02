@@ -5,3 +5,7 @@ export interface IProduct {
   price: number;
   imageUrl: string;
 }
+
+export enum Type {
+  GET_PRODUCTS = 'get_products',
+}

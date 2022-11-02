@@ -1,18 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Outlet } from 'react-router';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '@assets/images/logo.png';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import LocaleSwitcher from '../shared/LocaleSwitcher';
 import Basket from '../shared/icons/Basket';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { cartproductsCount } from '@src/pages/cart/cartSelectors';
+import { checkServerStatus, getServerState } from '@src/store/publicSlice';
+import { AppDispatch } from '@src/store';
 
 function MainLayout() {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const location = useLocation();
   const basketItemsCount = useSelector(cartproductsCount);
+  const dispatch = useDispatch<AppDispatch>();
+  const serverStatus = useSelector(getServerState);
+
+  useEffect(() => {
+    dispatch(checkServerStatus());
+  }, []);
 
   const forceLogin = () => {
     localStorage.setItem('token', 'test');
@@ -22,6 +30,12 @@ function MainLayout() {
   const shouldDisplayCart = useMemo<boolean>(() => {
     return !!location.pathname.match('/products');
   }, [location.pathname]);
+
+  const mainHeight = useMemo<string>(() => {
+    return serverStatus === 'on'
+      ? 'h-[calc(100vh-4rem)]'
+      : 'h-[calc(100vh-7rem)]';
+  }, [serverStatus]);
 
   return (
     <div>
@@ -57,7 +71,14 @@ function MainLayout() {
         </p>
         <LocaleSwitcher customClass='flex items-center justify-end' />
       </nav>
-      <div className='child:px-10 child:py-4 h-[calc(100vh-4rem)]'>
+      {serverStatus === 'off' && (
+        <h2 className='bg-red-200 p-2 text-lg h-12 center gap-2 '>
+          <Trans i18nKey='notice.title' />
+        </h2>
+      )}
+      <div
+        className={`child:px-10 child:py-4 child:bg-gray-200 child:min-h-full ${mainHeight}`}
+      >
         <Outlet />
       </div>
     </div>

@@ -24,5 +24,6 @@ export enum Types {
   GET_USERS = 'get_users',
   GET_POSTS = 'get_posts',
   ADD_POST = 'add_post',
+  EDIT_POST = 'edit_post',
   DELETE_POST = 'delete_post',
 }

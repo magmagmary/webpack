@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import Card from './Card';
+import Card from './CatsCard';
 import { fireEvent, screen } from '@testing-library/react';
 import RenderWithi18n from '../../../components/shared/RenderWithi18n';
 import { CatsContext } from '../Cats';
@@ -10,7 +10,7 @@ describe('Card', () => {
   describe('Not Favorite card', () => {
     beforeEach(() => {
       RenderWithi18n(
-        <CatsContext.Provider value={{ cats, mainCatsList: cats }}>
+        <CatsContext.Provider value={{ cats }}>
           <Card item={cats[0]} />
         </CatsContext.Provider>,
       );
@@ -48,7 +48,7 @@ describe('Card', () => {
     test('should display filled heart', () => {
       cats[0].favoured = true;
       RenderWithi18n(
-        <CatsContext.Provider value={{ cats, mainCatsList: cats }}>
+        <CatsContext.Provider value={{ cats }}>
           <Card item={cats[0]} />
         </CatsContext.Provider>,
       );

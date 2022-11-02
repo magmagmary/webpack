@@ -14,7 +14,7 @@ function Cart() {
   const dispatch = useDispatch();
 
   return (
-    <div className=' bg-gray-300 lg:grid-cols-4 2xl:grid-cols-5 min-h-full center'>
+    <div className=' bg-gray-300 lg:grid-cols-4 2xl:grid-cols-5 center'>
       {basketItems.length > 0 ? (
         <div className='w-5/6 mx-auto bg-white p-8'>
           <h1 className='text-3xl font-bold border-b py-4 '>

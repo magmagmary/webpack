@@ -54,6 +54,15 @@ const Home = () => {
           </li>
           <li>
             <a
+              href='https://www.express.com/'
+              className='text-gray-500'
+              target='_blanck'
+            >
+              Express
+            </a>
+          </li>
+          <li>
+            <a
               href='https://www.i18next.com/'
               target='_blanck'
               className='text-gray-500'

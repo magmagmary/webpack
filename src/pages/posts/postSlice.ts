@@ -1,9 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  nanoid,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axiosClient from '@src/plugins/axios';
 import { AxiosResponse } from 'axios';
 import { IPost, IReaction, IUser, Types } from './postInterface';
@@ -72,6 +67,23 @@ export const addNewPost = createAsyncThunk(
   },
 );
 
+export const editPost = createAsyncThunk(
+  Types.EDIT_POST,
+  async (data: Partial<IPost>): Promise<IPost> => {
+    const url = 'posts';
+    try {
+      const response: AxiosResponse<IPost, unknown> = await axiosClient.put(
+        url,
+        data,
+      );
+      const _data: IPost = new Post(response.data);
+      return _data;
+    } catch (error: unknown) {
+      throw new Error(`Error in '(${url})'`);
+    }
+  },
+);
+
 export const deletePost = createAsyncThunk(
   Types.DELETE_POST,
   async (id: string): Promise<string> => {
@@ -101,6 +113,7 @@ const cartSlice = createSlice({
         const _posts = [...state.posts];
         _posts[indexOfPost].reactions[reaction]++;
         state.posts = _posts;
+        console.log(' state.posts', state.posts);
       }
     },
   },
@@ -128,6 +141,13 @@ const cartSlice = createSlice({
       )
       .addCase(addNewPost.fulfilled, (state, action: PayloadAction<IPost>) => {
         state.posts.push(action.payload);
+      })
+      .addCase(editPost.fulfilled, (state, action: PayloadAction<IPost>) => {
+        const _posts = [...state.posts];
+        const index = _posts.findIndex((p) => p.id === action.payload.id);
+        _posts[index] = action.payload;
+        _posts[index].date = new Date().toISOString();
+        state.posts = _posts;
       })
       .addCase(deletePost.fulfilled, (state, action: PayloadAction<string>) => {
         const id = action.payload;

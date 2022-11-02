@@ -1,17 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react';
-import Cards from './components/Cards';
+import Cards from './components/CatsCards';
 import Filter from './components/Filter';
 import { ICat, IFilter } from './catsInterfaces';
-import { Trans } from 'react-i18next';
 import { fetchAllcats } from './catsSlice';
-import store, { AppDispatch } from '@src/store';
-import axiosClient from '@src/plugins/axios';
+import { AppDispatch } from '@src/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatsList } from './catsSelector';
 
 interface IContxt {
   cats: ICat[];
-  mainCatsList: ICat[];
 }
 
 export const CatsContext = createContext<IContxt>({} as IContxt);
@@ -38,7 +35,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axiosClient.setupAxiosInterceptors();
     dispatch(fetchAllcats());
   }, []);
 
@@ -47,13 +43,10 @@ const Home = () => {
   }, [filters, cats]);
 
   return (
-    <div className='bg-gray-200 h-full grid grid-cols-3 2xl:grid-cols-5 gap-8'>
-      <CatsContext.Provider value={{ cats: filteredCats, mainCatsList: cats }}>
+    <div className=' h-full grid grid-cols-3 2xl:grid-cols-5 gap-8'>
+      <CatsContext.Provider value={{ cats: filteredCats }}>
         <Filter filters={filters} setFilters={setFilters} />
         <div className='col-span-2 2xl:col-span-4'>
-          <h2 className='bg-red-200 p-2 mb-5'>
-            <Trans i18nKey='cats.title' />
-          </h2>
           <Cards />
         </div>
       </CatsContext.Provider>

@@ -30,8 +30,8 @@
       "remove":"Remove Item",
       "checkout":"Checkout"
    },
-   "cats":{
-      "title":"To get the list of cats <strong>node index</strong> command must run in the server folder."
+   "notice":{
+      "title":"To start the back-end server <strong>node index</strong> command must run in the server folder."
    },
    "posts":{
       "form":"Add new Post",
@@ -39,7 +39,9 @@
       "content":"Content",
       "author":"Author",
       "submit":"submit",
-      "unknown":"Unknown"
+      "unknown":"Unknown",
+      "empty":"No Post found" ,
+      "back":"Back"
    },
    "dashboard":{
       "nav":{

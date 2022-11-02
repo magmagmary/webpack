@@ -30,8 +30,22 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+app.get("/server", async (req, res) => {
+  return res.status(200).json(true);
+});
 app.get("/cats", async (req, res) => {
   return res.json(cats);
+});
+app.post("/cats/favorite", async (req, res) => {
+  const { id } = req.query
+  console.log("id", id)
+  const index = cats.findIndex(p => p.id === +id)
+  console.log("index", index)
+  if (index === -1) {
+    return res.sendStatus(404);
+  }
+  cats[index].favoured = !cats[index].favoured
+  return res.json(id);
 });
 
 app.get("/users", async (req, res) => {
@@ -45,6 +59,15 @@ app.post("/posts", async (req, res) => {
   const _post = { ...req.body }
   _post.id = (posts.length > 0 ? (+posts[posts.length - 1].id + 1) : 1).toString()
   posts.push(_post)
+  return res.json(_post);
+});
+app.put("/posts", async (req, res) => {
+  const _post = { ...req.body }
+  const index = posts.findIndex(p => p.id === _post.id)
+  if (index === -1) {
+    return res.sendStatus(404);
+  }
+  posts[index] = _post
   return res.json(_post);
 });
 app.delete("/posts", async (req, res) => {

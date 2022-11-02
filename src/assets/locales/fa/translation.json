@@ -30,8 +30,8 @@
       "remove":"حذف از سبد",
       "checkout":"فاکتور"
    },
-   "cats":{
-      "title":"برای دریافت لیست گربه ها باید در فولدر سرور کامند <strong>node index</strong> اجرا شود."
+   "notice":{
+      "title":"برای شروع سرور باید در فولدر سرور کامند <strong>node index</strong> اجرا شود."
    },
    "posts":{
       "form":"ثبت پست جدید",
@@ -39,7 +39,9 @@
       "content":"متن",
       "author":"نویسنده",
       "submit":"ثبت",
-      "unknown":"ناشناس"
+      "unknown":"ناشناس",
+      "empty":" هیچ پستی پیدا نشد",
+      "back":"بازگشت"
    },
     "dashboard":{
        "nav":{

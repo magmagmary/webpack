@@ -1,7 +1,7 @@
-import React, { FC, useContext } from 'react';
+import React, { useContext } from 'react';
 import { CatsContext } from '../Cats';
 import { ICat } from '../catsInterfaces';
-import Card from './Card';
+import Card from './CatsCard';
 
 const Cards = () => {
   const { cats } = useContext(CatsContext);

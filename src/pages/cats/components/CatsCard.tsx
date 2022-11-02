@@ -1,40 +1,26 @@
-import React, { FC, memo, useContext, useState } from 'react';
+import React, { FC } from 'react';
 import Heart from '@src/components/shared/icons/Heart';
 import { useDispatch } from 'react-redux';
-import { CatsContext } from '../Cats';
 import { ICat } from '../catsInterfaces';
-import { catsAction } from '../catsSlice';
+import { toggleFavoriteCat } from '../catsSlice';
+import { AppDispatch } from '@src/store';
 
 const Card: FC<{
   item: ICat;
 }> = ({ item }) => {
-  const [favorite, setFavorite] = useState<boolean>(item.favoured);
-  const { mainCatsList } = useContext(CatsContext);
-  const dispatch = useDispatch();
-
-  const updateMainCatsList = (id: number, state: boolean) => {
-    const _cats: ICat[] = [...mainCatsList];
-    const index = _cats.findIndex((cat) => cat.id === id);
-    _cats[index].favoured = state;
-    dispatch(catsAction.updateCats(_cats));
-  };
-
-  const toggleFavoriteState = (id: number) => {
-    updateMainCatsList(id, !favorite);
-    setFavorite((pre: boolean) => !pre);
-  };
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <article className='bg-white rounded-md border-gray-300 overflow-hidden relative hover:shadow-2xl h-80'>
       <button
         className='absolute top-3 ltr:right-3 rtl:left-3 bg-slate-300 w-8 aspect-square rounded-full center text-purple-800'
-        onClick={() => toggleFavoriteState(item.id)}
+        onClick={() => dispatch(toggleFavoriteCat(item.id))}
       >
         <Heart
-          data-testid={favorite ? 'filled-heart' : 'ouline-heart'}
+          data-testid={item.favoured ? 'filled-heart' : 'ouline-heart'}
           width='1.5rem'
           className={`mx-auto stroke-current  ${
-            favorite ? 'fill-purple-800' : 'fill-slate-300'
+            item.favoured ? 'fill-purple-800' : 'fill-slate-300'
           }`}
         />
       </button>
@@ -55,4 +41,4 @@ const Card: FC<{
   );
 };
 
-export default memo(Card);
+export default Card;

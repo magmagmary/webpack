@@ -26,4 +26,5 @@ export enum Gender {
 
 export enum Types {
   GET_CATS = 'get_cats',
+  FAVORITE = 'favorite',
 }

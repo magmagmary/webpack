@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
@@ -11,11 +11,13 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+  <Suspense fallback={<>Hi</>}>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </Suspense>,
 );
 
 // Hot module replacement

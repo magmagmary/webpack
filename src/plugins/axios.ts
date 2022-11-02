@@ -1,13 +1,16 @@
+import { EnhancedStore } from '@reduxjs/toolkit';
+import { publicAction } from '@src/store/publicSlice';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import i18next from 'i18next';
 
 let axiosRequestInterceptorId = -1;
 let axiosResponseInterceptorId = -1;
 
-function axiosInterceptors() {
+function axiosInterceptors(store: EnhancedStore) {
   const baseUrl = `${process.env.IDP_BASE_URL}`;
   axios.defaults.withCredentials = true;
   axios.defaults.baseURL = baseUrl;
+  store.dispatch(publicAction.setAxiosInstanceState('active'));
 
   if (axiosRequestInterceptorId === -1) {
     axiosRequestInterceptorId = axios.interceptors.request.use(

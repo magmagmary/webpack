@@ -31,15 +31,25 @@ export const fetchAllcats = createAsyncThunk(
     }
   },
 );
+export const toggleFavoriteCat = createAsyncThunk(
+  Types.FAVORITE,
+  async (id: number): Promise<string> => {
+    const url = 'cats/favorite?id=' + id;
+    try {
+      const response: AxiosResponse<string, unknown> = await axiosClient.post(
+        url,
+      );
+      return response.data;
+    } catch (error: unknown) {
+      throw new Error(`Error in '(${url})'`);
+    }
+  },
+);
 
 const cartSlice = createSlice({
   name: 'cats',
   initialState,
-  reducers: {
-    updateCats: (state, action: PayloadAction<ICat[]>) => {
-      state.catsList = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllcats.pending, (state) => {
@@ -54,7 +64,18 @@ const cartSlice = createSlice({
       )
       .addCase(fetchAllcats.rejected, (state) => {
         state.status = 'failed';
-      });
+      })
+      .addCase(
+        toggleFavoriteCat.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          const id = action.payload;
+          const index = state.catsList.findIndex((p) => p.id === +id);
+          if (index === -1) return;
+          const _cats = [...state.catsList];
+          _cats[index].favoured = !_cats[index].favoured;
+          state.catsList = _cats;
+        },
+      );
   },
 });
 
