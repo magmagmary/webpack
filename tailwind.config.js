@@ -12,6 +12,10 @@ module.exports = {
       colors: {
         primary: '#007AFF',
         darkBlue: "#1F2F61",
+      },
+      fontSize: {
+        '100': '100%',
+        '70': '70%'
       }
     },
   },

@@ -72,7 +72,7 @@ function MainLayout() {
         <LocaleSwitcher customClass='flex items-center justify-end' />
       </nav>
       {serverStatus === 'off' && (
-        <h2 className='bg-red-200 p-2 text-lg h-12 center gap-2 '>
+        <h2 className='bg-red-200 p-2 text-lg lg:h-12 center gap-2  flex-wrap '>
           <Trans i18nKey='notice.title' />
         </h2>
       )}
