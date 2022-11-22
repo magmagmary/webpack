@@ -15,6 +15,8 @@ import Cart from '@src/pages/cart';
 import Posts from '@src/pages/posts';
 import Post from '@src/pages/posts/Post';
 import NewPost from '@src/pages/posts/components/NewPost';
+import Todos from '@src/features/todos';
+import RtkPosts from '@src/features/rtkPosts';
 
 function Router() {
   return (
@@ -36,6 +38,8 @@ function Router() {
         <Route path='/cats' element={<Cats />} />
         <Route path='/products' element={<Products />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/todos' element={<Todos />} />
+        <Route path='/posts-rtk' element={<RtkPosts />} />
         <Route path='/posts'>
           <Route path='new' element={<NewPost />} />
           <Route path='edit/:postId' element={<NewPost />} />

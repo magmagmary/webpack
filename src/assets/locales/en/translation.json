@@ -12,7 +12,8 @@
    "nav":{
       "cats":"Cats",
       "products":"Products",
-      "posts":"Posts"
+      "posts":"Posts",
+      "todos":"Todos"
    },
    "filter":{
       "all":"All",

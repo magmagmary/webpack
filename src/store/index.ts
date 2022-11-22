@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { postApi } from '@src/features/rtkPosts/postApi';
+import { todosApi } from '@src/features/todos/todosApi';
 import { cartReducer } from '@src/pages/cart/cartSlice';
 import { catsReducer } from '@src/pages/cats/catsSlice';
 import { postReducer } from '@src/pages/posts/postSlice';
@@ -12,11 +14,13 @@ const store = configureStore({
     post: postReducer,
     product: productReducer,
     public: publicReducer,
+    [todosApi.reducerPath]: todosApi.reducer,
+    [postApi.reducerPath]: postApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat([todosApi.middleware, postApi.middleware]),
 });
 
 export default store;

@@ -58,6 +58,7 @@ app.get("/posts", async (req, res) => {
 app.post("/posts", async (req, res) => {
   const _post = { ...req.body }
   _post.id = (posts.length > 0 ? (+posts[posts.length - 1].id + 1) : 1).toString()
+  _post.date = new Date().toISOString();
   posts.push(_post)
   return res.json(_post);
 });

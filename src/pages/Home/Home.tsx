@@ -90,6 +90,15 @@ const Home = () => {
           </li>
           <li>
             <a
+              href='https://redux-toolkit.js.org/rtk-query/overview'
+              className='text-gray-500'
+              target='_blanck'
+            >
+              RTK Query
+            </a>
+          </li>
+          <li>
+            <a
               href='https://jestjs.io/'
               target='_blanck'
               className='text-gray-500'
